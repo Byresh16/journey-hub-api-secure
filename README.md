@@ -19,7 +19,6 @@ A comprehensive backend API for a bus booking system built with Express.js, Mong
 - JWT authentication with refresh token functionality
 - Role-based authorization (Admin/User)
 - Input validation and sanitization
-- Rate limiting to prevent abuse
 - Secure password hashing with bcrypt
 
 ## Technology Stack
