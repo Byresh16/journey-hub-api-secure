@@ -1,0 +1,304 @@
+
+{
+  "info": {
+    "name": "Bus Booking System API",
+    "description": "Comprehensive API for bus booking system with JWT authentication",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"user\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Register Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Admin User\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\",\n  \"role\": \"admin\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "refresh"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Add Bus",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"busNumber\": \"MH12AB1234\",\n  \"capacity\": 40,\n  \"type\": \"AC\",\n  \"amenities\": [\"WiFi\", \"Charging Point\", \"Water Bottle\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/buses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "buses"]
+            }
+          }
+        },
+        {
+          "name": "Add Route",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"routeName\": \"Mumbai to Pune Express\",\n  \"origin\": \"Mumbai\",\n  \"destination\": \"Pune\",\n  \"distance\": 150,\n  \"duration\": 180,\n  \"stops\": [\"Lonavala\", \"Khandala\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/routes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "routes"]
+            }
+          }
+        },
+        {
+          "name": "Create Schedule",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bus\": \"{{busId}}\",\n  \"route\": \"{{routeId}}\",\n  \"departureTime\": \"2024-07-01T08:00:00Z\",\n  \"arrivalTime\": \"2024-07-01T11:00:00Z\",\n  \"price\": 500,\n  \"date\": \"2024-07-01\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/schedules",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "schedules"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Search Buses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/user/search?origin=Mumbai&destination=Pune&date=2024-07-01",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "user", "search"],
+              "query": [
+                {
+                  "key": "origin",
+                  "value": "Mumbai"
+                },
+                {
+                  "key": "destination",
+                  "value": "Pune"
+                },
+                {
+                  "key": "date",
+                  "value": "2024-07-01"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Book Bus",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"busScheduleId\": \"{{scheduleId}}\",\n  \"seatNumbers\": [1, 2],\n  \"passengerDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"age\": 30,\n      \"gender\": \"male\",\n      \"phone\": \"+1234567890\"\n    },\n    {\n      \"name\": \"Jane Doe\",\n      \"age\": 28,\n      \"gender\": \"female\",\n      \"phone\": \"+1234567891\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/user/book",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "user", "book"]
+            }
+          }
+        },
+        {
+          "name": "Get User Bookings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/user/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "user", "bookings"]
+            }
+          }
+        },
+        {
+          "name": "Cancel Booking",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/user/bookings/{{bookingId}}/cancel",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "user", "bookings", "{{bookingId}}", "cancel"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "refreshToken",
+      "value": ""
+    },
+    {
+      "key": "busId",
+      "value": ""
+    },
+    {
+      "key": "routeId",
+      "value": ""
+    },
+    {
+      "key": "scheduleId",
+      "value": ""
+    },
+    {
+      "key": "bookingId",
+      "value": ""
+    }
+  ]
+}
